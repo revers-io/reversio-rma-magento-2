@@ -72,9 +72,9 @@ abstract class SaveModel extends AbstractRequest
             'isReturnable' => true,
             'isRepairable' => true,
             'isTransportable' => true,
-            'isSerializable' => true,
-            'isOnSiteInterventionPossible' => true,
-            'isCumbersome' => true,
+            'isSerializable' => false,
+            'isOnSiteInterventionPossible' => false,
+            'isCumbersome' => false,
         ];
     }
 
