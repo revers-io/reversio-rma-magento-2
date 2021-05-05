@@ -30,11 +30,14 @@ class SyncOrder
 
     public function execute()
     {
+        $rmaAllowedOrderStatuses = $this->scopeConfig->getValue('reversio_rma/mapping/rma_allowed_order_statuses');
+        
         $orderCollection = $this->orderCollectionFactory->create()
             ->addFieldToFilter('reversio_sync_status', ['in' => [
                 \ReversIo\RMA\Helper\Constants::REVERSIO_SYNC_STATUS_SYNC_ERROR,
                 \ReversIo\RMA\Helper\Constants::REVERSIO_SYNC_STATUS_NOT_SYNC
             ]])
+            ->addFieldToFilter('state', ['in' => explode(',', $rmaAllowedOrderStatuses)])
             ->setPageSize($this->batchSize);
 
         $syncOrderStartDate = $this->scopeConfig->getValue('reversio_rma/mapping/sync_order_start_date');
